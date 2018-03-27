@@ -6,6 +6,8 @@ import com.massivecraft.factions.event.FactionCreateEvent;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.struct.Role;
 import com.massivecraft.factions.util.MiscUtil;
+import com.massivecraft.factions.zcore.FLevelPrestiges.Level;
+import com.massivecraft.factions.zcore.FLevelPrestiges.Prestige;
 import com.massivecraft.factions.zcore.util.TL;
 import org.bukkit.Bukkit;
 
@@ -87,6 +89,9 @@ public class CmdCreate extends FCommand {
         // finish setting up the FPlayer
         fme.setRole(Role.ADMIN);
         fme.setFaction(faction);
+
+        faction.setLevel(Level.ALPHA);
+        faction.setPrestige(Prestige.INITIAL);
 
         for (FPlayer follower : FPlayers.getInstance().getOnlinePlayers()) {
             follower.msg(TL.COMMAND_CREATE_CREATED, fme.describeTo(follower, true), faction.getTag(follower));

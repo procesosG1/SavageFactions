@@ -11,20 +11,17 @@ import com.massivecraft.factions.struct.Role;
 import com.massivecraft.factions.util.LazyLocation;
 import com.massivecraft.factions.util.MiscUtil;
 import com.massivecraft.factions.util.RelationUtil;
+import com.massivecraft.factions.zcore.FLevelPrestiges.Level;
+import com.massivecraft.factions.zcore.FLevelPrestiges.Prestige;
 import com.massivecraft.factions.zcore.fperms.Access;
 import com.massivecraft.factions.zcore.fperms.Permissable;
 import com.massivecraft.factions.zcore.fperms.PermissableAction;
 import com.massivecraft.factions.zcore.util.TL;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
 
 public abstract class MemoryFaction implements Faction, EconomyParticipator {
     protected String id = null;
@@ -53,6 +50,21 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     protected Map<Permissable, Map<PermissableAction, Access>> permissions = new HashMap<>();
     protected Set<BanInfo> bans = new HashSet<>();
 
+    /////// FACTIONS RPESTIGES STUFF ///////////
+
+    protected int levelPoints;
+    protected Prestige prestige;
+    protected Level level;
+
+    ////////////////////////////////////////////
+
+
+
+    ///////////////// KOTH STUFF ///////////////
+
+    protected int kothWins;
+
+    ////////////////////////////////////////////
     public HashMap<String, List<String>> getAnnouncements() {
         return this.announcements;
     }
@@ -489,7 +501,6 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     }
 
     public void resetPerms() {
-        P.p.log(Level.WARNING, "Resetting permissions for Faction: " + tag);
 
         permissions.clear();
 
@@ -1091,4 +1102,118 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     public Set<FLocation> getAllClaims() {
         return Board.getInstance().getAllClaims(this);
     }
+
+
+
+
+
+
+
+
+
+    ////////////// FACTION PRESTIGES /////////////////
+
+
+
+
+    public Prestige getPrestige(){
+        return prestige;
+    }
+
+    public com.massivecraft.factions.zcore.FLevelPrestiges.Level getLevel(){
+        return level;
+    }
+    public void setPrestige(Prestige prestige){
+        this.prestige = prestige;
+    }
+    public void setLevel(com.massivecraft.factions.zcore.FLevelPrestiges.Level level){
+        this.level = level;
+    }
+
+    public void levelUp(){
+        int lvl = level.getLevel();
+        if(lvl == 10)
+            return;
+        this.level = Level.getLevelByNumber(lvl+1);
+    }
+
+
+    public void levelDown(){
+        int lvl = level.getLevel();
+
+        if(lvl == 1){
+            if(prestige.equals(Prestige.INITIAL))
+                return;
+            this.level = Level.getLevelByNumber(10);
+            prestigeDown();
+        }
+
+        this.level = Level.getLevelByNumber(lvl-1);
+    }
+
+
+    public void prestigeUp(){
+        int p = prestige.getNumber();
+        if(p == 8) return;
+        this.prestige = Prestige.getPrestigeByNumber(p+1);
+    }
+
+    public void prestigeDown(){
+        int p = prestige.getNumber();
+        if(p == 1) return;
+        this.prestige = Prestige.getPrestigeByNumber(p-1);
+    }
+
+    public int getLevelPoints(){
+        return levelPoints;
+    }
+
+    public void setLevelPoints(int levelPoints){
+        this.levelPoints = levelPoints;
+    }
+
+    public void addLevelPoints(int levelPoints){
+        this.levelPoints += levelPoints;
+    }
+
+    public void takeLevelPoints(int levelPoints){
+        this.levelPoints -= levelPoints;
+    }
+
+    public boolean isPrestige(Prestige prestige){
+        return this.prestige.equals(prestige);
+    }
+
+    public boolean isLevel(com.massivecraft.factions.zcore.FLevelPrestiges.Level level){
+        return this.level.equals(level);
+    }
+
+
+    public void broadCastMessage(String message){
+        for(FPlayer fp : this.getFPlayersWhereOnline(true)){
+            fp.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        }
+    }
+
+
+
+    ////////////////////////////////////////////////////
+
+    /////////////////////// KOTH ////////////////////////
+
+
+    public int getKothWins(){
+        return kothWins;
+    }
+    public void setKothWins(int wins){
+        kothWins = wins;
+    }
+
+    public void addKothWin(){
+        kothWins++;
+    }
+
+
+
+    //////////////////////////////////////////////////////
 }

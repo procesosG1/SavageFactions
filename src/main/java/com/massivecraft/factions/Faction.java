@@ -6,6 +6,8 @@ import com.massivecraft.factions.struct.BanInfo;
 import com.massivecraft.factions.struct.Relation;
 import com.massivecraft.factions.struct.Role;
 import com.massivecraft.factions.util.LazyLocation;
+import com.massivecraft.factions.zcore.FLevelPrestiges.Level;
+import com.massivecraft.factions.zcore.FLevelPrestiges.Prestige;
 import com.massivecraft.factions.zcore.fperms.Access;
 import com.massivecraft.factions.zcore.fperms.Permissable;
 import com.massivecraft.factions.zcore.fperms.PermissableAction;
@@ -315,4 +317,50 @@ public interface Faction extends EconomyParticipator {
     public Set<FLocation> getAllClaims();
 
     public void setId(String id);
+
+
+
+
+    ////////////// FACTION PRESTIGES /////////////////
+
+
+
+
+    public Prestige getPrestige();
+    public Level getLevel();
+    public void setPrestige(Prestige prestige);
+    public void setLevel(Level level);
+
+    public void levelUp();
+    public void levelDown();
+    public void prestigeUp();
+    public void prestigeDown();
+
+    public int getLevelPoints();
+    public void setLevelPoints(int levelPoints);
+    public void addLevelPoints(int levelPoints);
+    public void takeLevelPoints(int levelPoints);
+
+    public boolean isPrestige(Prestige prestige);
+    public boolean isLevel(Level level);
+
+
+    public void broadCastMessage(String message);
+
+
+    ////////////////////////////////////////////////////
+
+
+
+    ////////////// KOTH //////////////////////////////////
+
+
+    public int getKothWins();
+    public void setKothWins(int wins);
+    public void addKothWin();
+
+
+    /////////////////////////////////////////////////////////
+
+
 }

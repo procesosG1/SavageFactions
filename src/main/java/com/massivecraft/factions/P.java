@@ -11,6 +11,7 @@ import com.massivecraft.factions.integration.dynmap.EngineDynmap;
 import com.massivecraft.factions.listeners.*;
 import com.massivecraft.factions.struct.ChatMode;
 import com.massivecraft.factions.util.*;
+import com.massivecraft.factions.zcore.FLevelPrestiges.FLevelPrestigesListener;
 import com.massivecraft.factions.zcore.MPlugin;
 import com.massivecraft.factions.zcore.fperms.Access;
 import com.massivecraft.factions.zcore.fperms.Permissable;
@@ -147,6 +148,8 @@ public class P extends MPlugin {
 
         // Register Event Handlers
         getServer().getPluginManager().registerEvents(new FactionsPlayerListener(this), this);
+        getServer().getPluginManager().registerEvents(new FLevelPrestigesListener(), this);
+        getServer().getPluginManager().registerEvents(new KothWinListener(), this);
         getServer().getPluginManager().registerEvents(new FactionsChatListener(this), this);
         getServer().getPluginManager().registerEvents(new FactionsEntityListener(this), this);
         getServer().getPluginManager().registerEvents(new FactionsExploitListener(), this);

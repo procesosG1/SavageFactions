@@ -173,4 +173,18 @@ public abstract class MemoryFactions extends Factions {
     }
 
     public abstract void convertFrom(MemoryFactions old);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

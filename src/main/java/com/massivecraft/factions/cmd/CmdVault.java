@@ -1,23 +1,13 @@
 package com.massivecraft.factions.cmd;
-
-import com.drtshock.playervaults.PlayerVaults;
-import com.drtshock.playervaults.translations.Lang;
-import com.drtshock.playervaults.vaultmanagement.UUIDVaultManager;
-import com.drtshock.playervaults.vaultmanagement.VaultOperations;
-import com.drtshock.playervaults.vaultmanagement.VaultViewInfo;
 import com.massivecraft.factions.Board;
-import com.massivecraft.factions.Conf;
 import com.massivecraft.factions.FLocation;
 import com.massivecraft.factions.P;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.zcore.util.TL;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
+
 import org.bukkit.inventory.Inventory;
 
 public class CmdVault extends FCommand {
