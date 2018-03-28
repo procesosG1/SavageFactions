@@ -1,6 +1,7 @@
 package com.massivecraft.factions.zcore.persist;
 
 import com.massivecraft.factions.*;
+import com.massivecraft.factions.event.FLevelsEvents.*;
 import com.massivecraft.factions.iface.EconomyParticipator;
 import com.massivecraft.factions.iface.RelationParticipator;
 import com.massivecraft.factions.integration.Econ;
@@ -1119,7 +1120,6 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     public Prestige getPrestige(){
         return prestige;
     }
-
     public com.massivecraft.factions.zcore.FLevelPrestiges.Level getLevel(){
         return level;
     }
@@ -1130,11 +1130,28 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
         this.level = level;
     }
 
+    public boolean isMaxPrestige(){
+        return prestige.equals(Prestige.IMPERIO);
+    }
+
+    public boolean isMaxLevel(){
+        return level.equals(Level.JULIET);
+    }
+
     public void levelUp(){
         int lvl = level.getLevel();
-        if(lvl == 10)
-            return;
+        if(isMaxLevel()){
+
+            if(isMaxPrestige())
+                return;
+
+            prestigeUp();
+            this.level = Level.ALPHA;
+        }
+
         this.level = Level.getLevelByNumber(lvl+1);
+        FactionLevelUpevent event = new FactionLevelUpevent(this, level);
+        Bukkit.getServer().getPluginManager().callEvent(event);
     }
 
 
@@ -1149,6 +1166,9 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
         }
 
         this.level = Level.getLevelByNumber(lvl-1);
+        FactionLevelDownEvent event = new FactionLevelDownEvent(this,level);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+
     }
 
 
@@ -1156,12 +1176,16 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
         int p = prestige.getNumber();
         if(p == 8) return;
         this.prestige = Prestige.getPrestigeByNumber(p+1);
+        FactionPrestigeUpEvent event = new FactionPrestigeUpEvent(this,prestige);
+        Bukkit.getServer().getPluginManager().callEvent(event);
     }
 
     public void prestigeDown(){
         int p = prestige.getNumber();
         if(p == 1) return;
         this.prestige = Prestige.getPrestigeByNumber(p-1);
+        FactionPrestigeDownEvent event = new FactionPrestigeDownEvent(this,prestige);
+        Bukkit.getServer().getPluginManager().callEvent(event);
     }
 
     public int getLevelPoints(){
@@ -1173,11 +1197,16 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     }
 
     public void addLevelPoints(int levelPoints){
+        if(!isAcceptableFaction())
+            return;
         this.levelPoints += levelPoints;
+        FactionGainedPointsEvent event = new FactionGainedPointsEvent(this,levelPoints);
     }
 
     public void takeLevelPoints(int levelPoints){
         this.levelPoints -= levelPoints;
+        FactionLostLevelPoints event = new FactionLostLevelPoints(this,levelPoints);
+        Bukkit.getServer().getPluginManager().callEvent(event);
     }
 
     public boolean isPrestige(Prestige prestige){
@@ -1196,6 +1225,10 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     }
 
 
+    //prevent grinding level points
+    public boolean isAcceptableFaction(){
+        return getSize() >= 10 && getHome()!= null && getAllClaims().size()>= 25;
+    }
 
     ////////////////////////////////////////////////////
 
@@ -1208,7 +1241,6 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     public void setKothWins(int wins){
         kothWins = wins;
     }
-
     public void addKothWin(){
         kothWins++;
     }

@@ -78,7 +78,6 @@ public abstract class MemoryFPlayer implements FPlayer {
     protected transient boolean loginPvpDisabled;
     protected transient long lastFrostwalkerMessage;
     protected transient boolean shouldTakeFallDamage = true;
-
     public void login() {
         this.kills = getPlayer().getStatistic(Statistic.PLAYER_KILLS);
         this.deaths = getPlayer().getStatistic(Statistic.DEATHS);

@@ -12,6 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.net.InetSocketAddress;
 import java.util.List;
 
 
@@ -304,5 +305,12 @@ public interface FPlayer extends EconomyParticipator {
     public void stopWarmup();
 
     public void clearWarmup();
+
+
+    ////// ANTIGRIND STUFF /////////////
+
+    public void setPlayerIP(InetSocketAddress adress);
+
+    ///////////////////////////////////
 
 }
