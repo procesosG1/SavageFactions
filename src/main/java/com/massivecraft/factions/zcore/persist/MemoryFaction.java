@@ -1138,6 +1138,14 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
         return level.equals(Level.JULIET);
     }
 
+    public boolean isMinPrestige(){
+        return prestige.equals(Prestige.INITIAL);
+    }
+
+    public boolean isMinLevel(){
+        return level.equals(Level.ALPHA);
+    }
+
     public void levelUp(){
         int lvl = level.getLevel();
         if(isMaxLevel()){
@@ -1174,7 +1182,7 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
 
     public void prestigeUp(){
         int p = prestige.getNumber();
-        if(p == 8) return;
+        if(isMaxPrestige()) return;
         this.prestige = Prestige.getPrestigeByNumber(p+1);
         FactionPrestigeUpEvent event = new FactionPrestigeUpEvent(this,prestige);
         Bukkit.getServer().getPluginManager().callEvent(event);
@@ -1189,11 +1197,19 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     }
 
     public int getLevelPoints(){
+
+        int points = 0;
+        for(FPlayer fPlayer : this.getFPlayers()){
+            points += fPlayer.getLevelPoints();
+        }
+        this.levelPoints = points;
         return levelPoints;
     }
 
     public void setLevelPoints(int levelPoints){
         this.levelPoints = levelPoints;
+        if(this.levelPoints < 0)
+            this.levelPoints = 0;
     }
 
     public void addLevelPoints(int levelPoints){
@@ -1201,10 +1217,14 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
             return;
         this.levelPoints += levelPoints;
         FactionGainedPointsEvent event = new FactionGainedPointsEvent(this,levelPoints);
+        Bukkit.getServer().getPluginManager().callEvent(event);
     }
 
     public void takeLevelPoints(int levelPoints){
         this.levelPoints -= levelPoints;
+        if(this.levelPoints < 0)
+            this.levelPoints = 0;
+
         FactionLostLevelPoints event = new FactionLostLevelPoints(this,levelPoints);
         Bukkit.getServer().getPluginManager().callEvent(event);
     }
@@ -1225,10 +1245,7 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
     }
 
 
-    //prevent grinding level points
-    public boolean isAcceptableFaction(){
-        return getSize() >= 10 && getHome()!= null && getAllClaims().size()>= 25;
-    }
+
 
     ////////////////////////////////////////////////////
 
@@ -1248,4 +1265,21 @@ public abstract class MemoryFaction implements Faction, EconomyParticipator {
 
 
     //////////////////////////////////////////////////////
+
+
+
+    /////////////////// ANTIGRIND STUFF ///////////////////
+
+    //prevent grinding level points
+    public boolean isAcceptableFaction(){
+        return true;//return getSize() >= 10 && getHome()!= null && getAllClaims().size()>= 25;
+    }
+
+
+
+
+
+    ///////////////////////////////////////////////////////
+
+
 }

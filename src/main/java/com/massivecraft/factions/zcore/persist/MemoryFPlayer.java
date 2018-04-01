@@ -2,6 +2,8 @@ package com.massivecraft.factions.zcore.persist;
 
 import com.massivecraft.factions.*;
 import com.massivecraft.factions.cmd.CmdFly;
+import com.massivecraft.factions.event.FLevelsEvents.FactionGainedPointsEvent;
+import com.massivecraft.factions.event.FLevelsEvents.FactionLostLevelPoints;
 import com.massivecraft.factions.event.FPlayerLeaveEvent;
 import com.massivecraft.factions.event.FPlayerStoppedFlying;
 import com.massivecraft.factions.event.LandClaimEvent;
@@ -78,6 +80,7 @@ public abstract class MemoryFPlayer implements FPlayer {
     protected transient boolean loginPvpDisabled;
     protected transient long lastFrostwalkerMessage;
     protected transient boolean shouldTakeFallDamage = true;
+    protected int levelPoints;
     public void login() {
         this.kills = getPlayer().getStatistic(Statistic.PLAYER_KILLS);
         this.deaths = getPlayer().getStatistic(Statistic.DEATHS);
@@ -1147,5 +1150,35 @@ public abstract class MemoryFPlayer implements FPlayer {
             return Conf.prefixAdmin;
         }
         return null;
+    }
+
+
+    @Override
+    public void addLevelPoints(int points){
+        this.levelPoints += points;
+        if(this.getFaction().isWilderness())
+            return;
+        FactionGainedPointsEvent event = new FactionGainedPointsEvent(this.getFaction(),points);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+    }
+
+    @Override
+    public void takeLevelPoints(int points){
+        this.levelPoints -= points;
+        if(this.getFaction().isWilderness())
+            return;
+        FactionLostLevelPoints event = new FactionLostLevelPoints(this.getFaction(),points);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+
+    }
+
+    @Override
+    public int getLevelPoints() {
+        return levelPoints;
+    }
+
+    @Override
+    public void setLevelPoints(int levelPoints) {
+        this.levelPoints = levelPoints;
     }
 }

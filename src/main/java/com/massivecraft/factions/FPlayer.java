@@ -307,9 +307,15 @@ public interface FPlayer extends EconomyParticipator {
     public void clearWarmup();
 
 
-    ////// ANTIGRIND STUFF /////////////
+    ///////////////////
 
-    public void setPlayerIP(InetSocketAddress adress);
+
+    public void setLevelPoints(int points);
+    public int getLevelPoints();
+    public void addLevelPoints(int points);
+    public void takeLevelPoints(int points);
+
+
 
     ///////////////////////////////////
 

@@ -681,6 +681,7 @@ public enum TL {
     COMMAND_RULES_SET_SUCCESS("&cRule set successfully!"),
     COMMAND_RULES_CLEAR_SUCCESS("&cRule cleared successfully!"),
 
+    COMMAND_PRESTIGES_DESCRIPTION("&cNiveles y prestigios para tu faccion!"),
 
 
     /**

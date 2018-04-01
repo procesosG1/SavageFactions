@@ -93,6 +93,7 @@ public class FCmdRoot extends FCommand {
     public CmdBanner cmdBanner = new CmdBanner();
     public CmdTpBanner cmdTpBanner = new CmdTpBanner();
     public CmdKillHolograms cmdKillHolograms = new CmdKillHolograms();
+    public CmdPrestige cmdPrestige = new CmdPrestige();
     public FCmdRoot() {
         super();
         this.aliases.addAll(Conf.baseCommandAliases);
@@ -196,6 +197,7 @@ public class FCmdRoot extends FCommand {
         this.addSubCommand(this.cmdBanner);
         this.addSubCommand(this.cmdTpBanner);
         this.addSubCommand(this.cmdKillHolograms);
+        this.addSubCommand(this.cmdPrestige);
 
 
 

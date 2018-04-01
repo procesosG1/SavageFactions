@@ -344,6 +344,12 @@ public interface Faction extends EconomyParticipator {
     public boolean isPrestige(Prestige prestige);
     public boolean isLevel(Level level);
 
+    public boolean isMaxPrestige();
+    public boolean isMaxLevel();
+
+    public boolean isMinLevel();
+    public boolean isMinPrestige();
+
 
     public void broadCastMessage(String message);
 
@@ -362,5 +368,11 @@ public interface Faction extends EconomyParticipator {
 
     /////////////////////////////////////////////////////////
 
+
+    /////////////// ANTIGRIND STUFF ////////////////////////
+
+
+
+    ///////////////////////////////////////////////////////
 
 }

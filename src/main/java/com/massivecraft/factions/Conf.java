@@ -26,8 +26,8 @@ public class Conf {
     public static ChatColor colorWar = ChatColor.DARK_RED;
 
     // Power
-    public static double powerPlayerMax = 10.0;
-    public static double powerPlayerMin = -10.0;
+    public static double powerPlayerMax = 30.0;
+    public static double powerPlayerMin = -30.0;
     public static double powerPlayerStarting = 0.0;
     public static double powerPerMinute = 0.2; // Default health rate... it takes 5 min to heal one power
     public static double powerPerDeath = 4.0; // A death makes you lose 4 power
@@ -452,6 +452,138 @@ public class Conf {
         safeZoneNerfedCreatureTypes.add(EntityType.ZOMBIE);
     }
 
+    //////////////F PRESTIGES ////////////////
+    public static int costLevelBravo = 500;
+    public static int costLevelCharlie = 750;
+    public static int costLevelDelta = 1000;
+    public static int costLevelEcho = 1350;
+    public static int costLevelFoxtrot = 1800;
+    public static int costLevelGolf = 2100;
+    public static int costLevelHotel = 2500;
+    public static int costLevelIndia = 2850;
+    public static int costLevelJuliet = 3400;
+    /////////////////////////////////////////
+
+    //////////// FEATURES
+    //
+    //
+    // //////////////////////
+
+    ////// PRESTIGE 1 ///////////
+
+    public static String featuresBravo = "&aFly en tu faccion!";
+    public static String featuresCharlie = "&aPuedes tener 1 aliado!";
+    public static String featuresDelta = "&aAcceso a &c/f ban";
+    public static String featuresEcho = "&aAcceso al &c/f broadcast";
+    public static String featuresFoxtrot = "&aPuedes colocar hoppers en tu faccion!";
+    public static String featuresGolf = "&aAcceso a &c/f ";
+    public static String featuresHotel = "&aAcceso a &c/outpost o /fortaleza";
+    public static String featuresIndia = "&aAcceso a &c/f coleader";
+    public static String featuresJuliet = "&aPuedes aumentar en 5 el tamaño de tu faccion!";
+
+    ////////////////////////////////
+
+    //////// PRESTIGE 2 ////////////
+    public static String featuresPrestige2 = "&a";
+    public static String featuresBravo2 = "&a";
+    public static String featuresCharlie2 = "&aAcceso a &c/f unclaimall";
+    public static String featuresDelta2 = "";
+    public static String featuresEcho2 = "";
+    public static String featuresFoxtrot2 = "";
+    public static String featuresGolf2 = "";
+    public static String featuresHotel2 = "";
+    public static String featuresIndia2 = "";
+    public static String featuresJuliet2 = "&aAcceso a &c/f checkpoint";
+
+    /////////////////////////////
+
+    //////////// PRESTIGE 3 ///////////////
+    public static String featuresAlpha3 = "";
+    public static String featuresBravo3 = "&aFly en territorio de aliados!";
+    public static String featuresCharlie3 = "";
+    public static String featuresDelta3 = "";
+    public static String featuresEcho3 = "";
+    public static String featuresFoxtrot3 = "";
+    public static String featuresGolf3 = "";
+    public static String featuresHotel3 = "";
+    public static String featuresIndia3 = "";
+    public static String featuresJuliet3 = "&aAcceso a &c/f banner";
+
+    ////////////////////////////////////////
+
+
+    /////////////// PRESTIGE 4 //////////////////
+    public static String featuresAlpha4 = "";
+    public static String featuresBravo4 = "&aFly en tu faccion!";
+    public static String featuresCharlie4 = "";
+    public static String featuresDelta4 = "";
+    public static String featuresEcho4 = "";
+    public static String featuresFoxtrot4 = "";
+    public static String featuresGolf4 = "";
+    public static String featuresHotel4 = "";
+    public static String featuresIndia4 = "";
+    public static String featuresJuliet4 = "&aAcceso a &c/f tnt";
+
+    /////////////////////////////////////////////
+
+
+    ///////////// PRESTIGE 5 //////////////////////
+    public static String featuresAlpha5 = "";
+    public static String featuresBravo5 = "&aPuedes recuperar power matando jugadores!";
+    public static String featuresCharlie5 = "";
+    public static String featuresDelta5 = "";
+    public static String featuresEcho5 = "";
+    public static String featuresFoxtrot5 = "";
+    public static String featuresGolf5 = "";
+    public static String featuresHotel5 = "";
+    public static String featuresIndia5 = "";
+    public static String featuresJuliet5 = "&aPuedes tener 1 ally mas!";
+
+    //////////////////////////////////////////////
+
+    ////////////// PRESTIGE 6 //////////////////////////
+    public static String featuresAlpha6 = "";
+    public static String featuresBravo6 = "&aFly en tu faccion!";
+    public static String featuresCharlie6 = "";
+    public static String featuresDelta6 = "";
+    public static String featuresEcho6 = "";
+    public static String featuresFoxtrot6 = "";
+    public static String featuresGolf6 = "";
+    public static String featuresHotel6 = "";
+    public static String featuresIndia6 = "";
+    public static String featuresJuliet6 = "";
+
+    ////////////////////////////////////////////////////
+
+    /////////////// PRESTIGE 7 /////////////////////////
+    public static String featuresAlpha7 = "";
+    public static String featuresBravo7 = "&aFly en tu faccion!";
+    public static String featuresCharlie7 = "";
+    public static String featuresDelta7 = "";
+    public static String featuresEcho7 = "";
+    public static String featuresFoxtrot7 = "";
+    public static String featuresGolf7 = "";
+    public static String featuresHotel7 = "";
+    public static String featuresIndia7 = "";
+    public static String featuresJuliet7 = "";
+
+
+    ////////////////////////////////////////////////////
+
+
+    /////////////// PRESTIGE 8 //////////////////////
+    public static String featuresAlpha8 = "";
+    public static String featuresBravo8 = "&aFly en tu faccion!";
+    public static String featuresCharlie8 = "";
+    public static String featuresDelta8 = "";
+    public static String featuresEcho8 = "";
+    public static String featuresFoxtrot8 = "";
+    public static String featuresGolf8 = "";
+    public static String featuresHotel8 = "";
+    public static String featuresIndia8 = "";
+    public static String featuresJuliet8 = "&aAcceso a &c/f fly &aen wilderness!";
+    ///////////////////////////////////////////////////
+
     // -------------------------------------------- //
     // Persistance
     // -------------------------------------------- //
@@ -470,5 +602,9 @@ public class Conf {
         //MYSQL,  TODO
         ;
     }
+
+
+
+
 }
 
